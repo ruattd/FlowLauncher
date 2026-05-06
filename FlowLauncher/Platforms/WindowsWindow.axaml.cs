@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
+using FlowNet.Core;
 
 namespace FlowLauncher.Platforms;
 
@@ -21,5 +22,11 @@ public partial class WindowsWindow : Window
         base.OnOpened(e);
         BackgroundPanel.RenderTransform = new ScaleTransform(1.0, 1.0);
         BackgroundPanel.Opacity = 1;
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        base.OnClosed(e);
+        Flow.InvokeTask("app:func:stop");
     }
 }
