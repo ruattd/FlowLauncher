@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FlowLauncher.Platforms.MacWindow"
-        Icon="/Assets/logo.ico"
-        Title="Flow Launcher"
+        Icon="/Assets/logo.ico" Title="Flow Launcher"
+        MinWidth="900" MinHeight="540"
+        Width="900" Height="540"
         ExtendClientAreaToDecorationsHint="True"/>

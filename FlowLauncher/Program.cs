@@ -33,7 +33,7 @@ static partial class Program
     private static readonly ManualResetEventSlim OnAvaloniaStart = new();
     private static readonly TaskCompletionSource OnAvaloniaEnd = new();
     private static readonly ManualResetEventSlim OnProgramEnd = new();
-    private static readonly ManualResetEventSlim OnProgramExit = new();
+    private static readonly TaskCompletionSource OnProgramExit = new();
     private static readonly CancellationTokenSource OnAvaloniaEndTokenSource = new();
 
     private static void AppMain(Application app, string[] args)
@@ -42,7 +42,7 @@ static partial class Program
         app.Run(OnAvaloniaEndTokenSource.Token);
         OnAvaloniaEnd.SetResult();
         OnProgramEnd.Wait();
-        OnProgramExit.Set();
+        OnProgramExit.SetResult();
         Environment.Exit(0);
     }
 
@@ -75,20 +75,28 @@ static partial class Program
         await OnAvaloniaEnd.Task.ConfigureAwait(false);
     }
 
+    private static bool _isStopping = false;
+
     [Flow.Task("func:stop")]
     private static async Task StopAvaloniaAsync()
     {
+        if (_isStopping)
+        {
+            await OnProgramExit.Task.ConfigureAwait(false);
+            return;
+        }
+        _isStopping = true;
         Console.WriteLine("Stopping...");
         await OnAvaloniaEndTokenSource.CancelAsync().ConfigureAwait(false);
     }
 
     [Flow.Task("func:exit")] [Flow.Run(After = "app:exit")]
-    private static void EndProgram()
+    private static async Task EndProgram()
     {
         Console.WriteLine("Exiting...");
         OnProgramEnd.Set();
-        OnProgramExit.Wait(TimeSpan.FromSeconds(5));
-        if (OnProgramExit.IsSet) return;
+        await OnProgramExit.Task.WaitAsync(TimeSpan.FromSeconds(5)).ConfigureAwait(false);
+        if (OnProgramExit.Task.IsCompleted) return;
         Console.WriteLine("Exit request timeout, force exiting...");
         Environment.Exit(1);
     }
