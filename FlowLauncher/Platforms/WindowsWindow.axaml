@@ -43,8 +43,8 @@
                             </Setter>
                         </Style>
                     </Grid.Styles>
-                    <Grid Grid.Column="1" Classes="Nav" x:Name="BackPanel" Opacity="0"
-                            ColumnDefinitions="Auto,Auto,*" ColumnSpacing="10">
+                    <Grid Grid.Column="1" Classes="Nav" x:Name="BackPanel" ColumnDefinitions="Auto,Auto,*" ColumnSpacing="10"
+                            Opacity="{Binding RootLayout.HasLastPage, Converter={x:Static c:Converters.BooleanToOpacity}}">
                         <Grid.RenderTransform>
                             <TranslateTransform X="-40" Y="0">
                                 <TranslateTransform.Transitions><Transitions>
@@ -61,7 +61,8 @@
                         <TextBlock Grid.Column="1" VerticalAlignment="Center"
                                 Text="{Binding RootLayout.CurrentPage.Title}" FontSize="16"/>
                     </Grid>
-                    <Grid Grid.Column="1" Classes="Nav" x:Name="TitlePanel" Opacity="1">
+                    <Grid Grid.Column="1" Classes="Nav" x:Name="TitlePanel"
+                            Opacity="{Binding !RootLayout.HasLastPage, Converter={x:Static c:Converters.BooleanToOpacity}}">
                         <Grid.RenderTransform>
                             <TranslateTransform X="0" Y="0">
                                 <TranslateTransform.Transitions><Transitions>
