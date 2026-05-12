@@ -44,7 +44,7 @@
                         FontSize="10" IconWidth="8" Padding="4, 2"/>
                 <!-- ReSharper restore Xaml.PossibleNullReferenceException -->
                 <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
-                        Text="{Binding RootLayout.CurrentPage.Title}"
+                        Text="{Binding RootLayout.CurrentPage.Title}" IsEnabled="False"
                         FontSize="16" Foreground="{DynamicResource FlowTopBarForeground}"/>
             </Grid>
         </Grid>
