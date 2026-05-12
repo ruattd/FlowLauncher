@@ -85,6 +85,15 @@ public class FlowRadioButton : TemplatedControl
         set => SetValue(PointerOverBackgroundOpacityProperty, value);
     }
 
+    public static readonly StyledProperty<double> BackgroundOpacityProperty =
+        AvaloniaProperty.Register<FlowRadioButton, double>(nameof(BackgroundOpacity), .1);
+
+    public double BackgroundOpacity
+    {
+        get => GetValue(BackgroundOpacityProperty);
+        set => SetValue(BackgroundOpacityProperty, value);
+    }
+
     public static readonly StyledProperty<HorizontalAlignment> TextAlignmentProperty =
         AvaloniaProperty.Register<FlowRadioButton, HorizontalAlignment>(nameof(TextAlignment), HorizontalAlignment.Center);
 

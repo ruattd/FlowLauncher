@@ -13,7 +13,7 @@
                 <Border CornerRadius="{TemplateBinding CornerRadius}" ClipToBounds="True"
                         Margin="{TemplateBinding Margin}">
                     <Grid>
-                        <Border Background="{TemplateBinding Background}" Opacity="0">
+                        <Border Background="{TemplateBinding Background}" Opacity="{TemplateBinding BackgroundOpacity}">
                             <Border.Transitions><Transitions>
                                 <DoubleTransition Property="Opacity" Duration="0:0:.1"/>
                             </Transitions></Border.Transitions>
@@ -43,7 +43,7 @@
                                 </Transitions>
                             </Grid.Resources>
                             <PathIcon Grid.Column="0" Data="{TemplateBinding Icon}"
-                                    IsVisible="{TemplateBinding Icon, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                                    IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}"
                                     Foreground="{TemplateBinding Foreground}"
                                     Transitions="{StaticResource Transitions}"
                                     Width="{TemplateBinding IconWidth}"
@@ -84,6 +84,7 @@
 
     <Style Selector="c|FlowRadioButton.MenuItem">
         <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="BackgroundOpacity" Value="0"/>
         <Setter Property="PointerOverBackgroundOpacity" Value=".15"/>
         <Setter Property="PressingBackgroundOpacity" Value=".3"/>
         <Setter Property="PressingForeground" Value="{DynamicResource FlowAccent}"/>
