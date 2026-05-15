@@ -2,12 +2,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:FlowLauncher.ViewModels"
         xmlns:c="clr-namespace:FlowLauncher.Controls"
         xmlns:r="clr-namespace:FlowLauncher.Resources"
+        xmlns:ui="clr-namespace:FlowLauncher.Components.UI"
         mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="540"
-        x:Class="FlowLauncher.Views.RootLayout"
-        x:DataType="vm:RootLayoutViewModel">
+        x:Class="FlowLauncher.Components.UI.RootLayout"
+        x:DataType="ui:RootLayoutViewModel">
     <Grid>
         <DockPanel>
             <!-- top bar -->
@@ -24,7 +24,7 @@
                         <Style Selector="c|FlowRadioButton">
                             <Setter Property="IsChecked">
                                 <MultiBinding Converter="{x:Static c:Converters.AllEqual}">
-                                    <Binding Path="CurrentPage.Id"/>
+                                    <Binding Path="CurrentPagePreview.Id"/>
                                     <Binding RelativeSource="{RelativeSource Self}" Path="Tag"/>
                                 </MultiBinding>
                             </Setter>
@@ -72,21 +72,28 @@
                         <ScrollViewer.Transitions><Transitions>
                             <DoubleTransition Property="Opacity" Duration="0:0:.05"/>
                         </Transitions></ScrollViewer.Transitions>
-                        <ItemsControl x:Name="LeftMenuItemsControl" DataContext="{Binding CurrentPage}"
-                                ItemsSource="{Binding LeftMenuItems}">
+                        <ScrollViewer.RenderTransform>
+                            <TranslateTransform X="{Binding _LeftMenuControl_TranslateX}" Y="0">
+                                <TranslateTransform.Transitions><Transitions>
+                                    <DoubleTransition Property="X" Duration="0:0:.1"/>
+                                </Transitions></TranslateTransform.Transitions>
+                            </TranslateTransform>
+                        </ScrollViewer.RenderTransform>
+                        <ItemsControl x:Name="LeftMenuItemsControl" DataContext="{Binding .}"
+                                ItemsSource="{Binding CurrentPage.LeftMenuItems}">
                             <ItemsControl.ItemTemplate><DataTemplate>
-                                <ContentControl Content="{Binding}" Opacity="0" Margin=".5,0,0,0">
+                                <ContentControl Content="{Binding}" Opacity="0" Margin=".3,0,0,0">
                                     <ContentControl.DataTemplates>
-                                        <DataTemplate DataType="vm:MenuTitleViewModel">
+                                        <DataTemplate DataType="ui:MenuTitleViewModel">
                                             <TextBlock Text="{Binding Title}" FontSize="14" Margin="12,15,30,5"
                                                     Foreground="{DynamicResource FlowTextSecondary}"/>
                                         </DataTemplate>
-                                        <DataTemplate DataType="vm:MenuItemViewModel">
+                                        <DataTemplate DataType="ui:MenuItemViewModel">
                                             <Grid>
                                                 <Grid.Tag>
                                                     <MultiBinding Converter="{x:Static c:Converters.AllEqual}">
                                                         <Binding Path="TargetContent"/>
-                                                        <Binding Path="DataContext.Content" FallbackValue="{x:Null}" ElementName="LeftMenuItemsControl"/>
+                                                        <Binding Path="DataContext.CurrentPageContentPreview" FallbackValue="{x:Null}" ElementName="LeftMenuItemsControl"/>
                                                     </MultiBinding>
                                                 </Grid.Tag>
                                                 <Grid.Styles>
@@ -155,7 +162,21 @@
                 </StackPanel>
             </Grid>
             <!-- main content -->
-            <Decorator x:Name="MainContent" Margin="0,5,5,5" Child="{Binding CurrentPage.Content}"/>
+            <Border ClipToBounds="True">
+                <Decorator Margin="0,5,5,5" Opacity="{Binding _MainContent_Opacity}"
+                        Child="{Binding CurrentPage.Content.ViewControl, FallbackValue={x:Null}}">
+                    <Decorator.RenderTransform>
+                        <TranslateTransform X="0" Y="{Binding _MainContent_TranslateY}">
+                            <TranslateTransform.Transitions><Transitions>
+                                <DoubleTransition Property="Y" Duration="0:0:.3" Easing="{StaticResource SpringEasing}"/>
+                            </Transitions></TranslateTransform.Transitions>
+                        </TranslateTransform>
+                    </Decorator.RenderTransform>
+                    <Decorator.Transitions><Transitions>
+                        <DoubleTransition Property="Opacity" Duration="0:0:.1"/>
+                    </Transitions></Decorator.Transitions>
+                </Decorator>
+            </Border>
         </DockPanel>
     </Grid>
 </UserControl>

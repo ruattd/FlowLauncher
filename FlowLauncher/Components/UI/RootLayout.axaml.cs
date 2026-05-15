@@ -3,14 +3,11 @@ using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.LogicalTree;
 using Avalonia.Media;
 using Avalonia.Threading;
-using Avalonia.VisualTree;
 using FlowLauncher.Controls;
-using FlowLauncher.ViewModels;
 
-namespace FlowLauncher.Views;
+namespace FlowLauncher.Components.UI;
 
 public partial class RootLayout : UserControl
 {
@@ -55,7 +52,7 @@ public partial class RootLayout : UserControl
 
     private void OnPageChanged()
     {
-        Dispatcher.UIThread.Invoke(async () =>
+        Dispatcher.UIThread.Invoke<Task>(async () =>
         {
             var controlItems = LeftMenuItemsControl.ItemsPanelRoot?.Children;
             if (controlItems == null || controlItems.Count == 0) return;
@@ -76,7 +73,7 @@ public partial class RootLayout : UserControl
 
     private void LeftMenuItem_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (sender is not FlowRadioButton { Tag: Control targetContent }) return;
-        ViewModel.CurrentPage.Content = targetContent;
+        if (sender is not FlowRadioButton { Tag: PageContentViewModel targetContent }) return;
+        ViewModel.SwitchContentCommand.Execute(targetContent);
     }
 }

@@ -1,9 +1,9 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:v="clr-namespace:FlowLauncher.Views"
         xmlns:c="clr-namespace:FlowLauncher.Controls"
         xmlns:p="clr-namespace:FlowLauncher.Platforms"
         xmlns:r="clr-namespace:FlowLauncher.Resources"
+        xmlns:ui="clr-namespace:FlowLauncher.Components.UI"
         x:Class="FlowLauncher.Platforms.WindowsWindow"
         Icon="/Assets/logo.ico" Title="{x:Static r:Strings.AppTitle}"
         MinWidth="900" MinHeight="540"
@@ -29,7 +29,7 @@
                 Background="{DynamicResource FlowWindowBackground}"
                 ClipToBounds="True">
             <Grid>
-                <v:RootLayout ParentWindow="{Binding RelativeSource={RelativeSource AncestorType=p:BaseWindow}}"
+                <ui:RootLayout ParentWindow="{Binding RelativeSource={RelativeSource AncestorType=p:BaseWindow}}"
                         DataContext="{Binding RootLayout, RelativeSource={RelativeSource AncestorType=p:BaseWindow}}"/>
                 <Grid Height="{StaticResource TopBarHeight}" VerticalAlignment="Top"
                         ColumnDefinitions="10,Auto,*,Auto,10" ColumnSpacing="5">
@@ -60,7 +60,7 @@
                                 ToolTip.Tip="{Binding RootLayout.LastPage.Title}"/>
                         <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="16"
                                 Foreground="{DynamicResource FlowTopBarForeground}"
-                                Text="{Binding RootLayout.CurrentPage.Title}"/>
+                                Text="{Binding RootLayout.CurrentPagePreview.Title}"/>
                     </Grid>
                     <Grid Grid.Column="1" Classes="Nav" x:Name="TitlePanel" IsVisible="True"
                             Opacity="{Binding !RootLayout.HasLastPage, Converter={x:Static c:Converters.BoolToOpacity}}">

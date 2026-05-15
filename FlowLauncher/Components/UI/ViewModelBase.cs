@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace FlowLauncher.ViewModels;
+namespace FlowLauncher.Components.UI;
 
 public abstract class ViewModelBase : ObservableObject
 {

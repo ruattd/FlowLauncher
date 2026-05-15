@@ -1,3 +1,3 @@
-﻿namespace FlowLauncher.ViewModels;
+﻿namespace FlowLauncher.Components.UI;
 
 public class MenuTitleViewModel : MenuItemViewModel;

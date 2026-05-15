@@ -2,6 +2,6 @@
 
 namespace FlowLauncher.ViewModels;
 
-public partial class SettingsPageViewModel() : PageViewModel("settings", Strings.PageTitleSettings)
+public partial class SettingsPageViewModel() : Components.UI.PageViewModel("settings", Strings.PageTitleSettings)
 {
 }

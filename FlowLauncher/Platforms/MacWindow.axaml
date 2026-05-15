@@ -1,9 +1,9 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:views="clr-namespace:FlowLauncher.Views"
         xmlns:p="clr-namespace:FlowLauncher.Platforms"
         xmlns:c="clr-namespace:FlowLauncher.Controls"
         xmlns:r="clr-namespace:FlowLauncher.Resources"
+        xmlns:ui="clr-namespace:FlowLauncher.Components.UI"
         x:Class="FlowLauncher.Platforms.MacWindow"
         Icon="/Assets/logo.ico" Title="{x:Static r:Strings.AppTitle}"
         MinWidth="900" MinHeight="540"
@@ -11,7 +11,7 @@
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         ExtendClientAreaToDecorationsHint="True">
     <Grid x:Name="BackgroundPanel">
-        <views:RootLayout ParentWindow="{Binding RelativeSource={RelativeSource AncestorType=p:BaseWindow}}"
+        <ui:RootLayout ParentWindow="{Binding RelativeSource={RelativeSource AncestorType=p:BaseWindow}}"
                 DataContext="{Binding RootLayout, RelativeSource={RelativeSource AncestorType=p:BaseWindow}}"/>
         <Grid VerticalAlignment="Top" Height="{StaticResource TopBarHeight}">
             <Grid Classes="Nav" x:Name="BackPanel" ColumnDefinitions="100,*,100" ColumnSpacing="10" Margin="8,4"
@@ -44,7 +44,7 @@
                         FontSize="10" IconWidth="8" Padding="4, 2"/>
                 <!-- ReSharper restore Xaml.PossibleNullReferenceException -->
                 <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
-                        Text="{Binding RootLayout.CurrentPage.Title}" IsEnabled="False"
+                        Text="{Binding RootLayout.CurrentPagePreview.Title}" IsEnabled="False"
                         FontSize="16" Foreground="{DynamicResource FlowTopBarForeground}"/>
             </Grid>
         </Grid>

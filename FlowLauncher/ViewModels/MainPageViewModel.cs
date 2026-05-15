@@ -1,4 +1,5 @@
-﻿using FlowLauncher.Resources;
+﻿using FlowLauncher.Components.UI;
+using FlowLauncher.Resources;
 using FlowLauncher.Views;
 
 namespace FlowLauncher.ViewModels;
@@ -22,7 +23,7 @@ public partial class MainPageViewModel : PageViewModel<MainPage>
             {
                 Title = "456",
                 Icon = Icon("IconSettings"),
-                TargetContent = new MainPage { DataContext = this }
+                TargetContent = PageContent<MainPage>()
             },
             new MenuItemViewModel
             {
