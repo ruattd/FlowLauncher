@@ -49,6 +49,9 @@ public partial class RootLayoutViewModel : ViewModelBase
         private set => SetProperty(ref field, value);
     }
 
+    [ObservableProperty]
+    public partial bool CurrentPageHasLeftExtraContent { get; private set; }
+
     [ObservableProperty] public partial double _LeftMenuControl_TranslateX { get; private set; } = 0;
     [ObservableProperty] public partial double _LeftMenuControl_Opacity { get; private set; } = 1;
     [ObservableProperty] public partial double _LeftExtraControl_Scale { get; private set; } = 1;
@@ -80,6 +83,7 @@ public partial class RootLayoutViewModel : ViewModelBase
             _LeftMenuControl_TranslateX = -20;
             _LeftMenuControl_Opacity = 0;
             await Task.Delay(TimeSpan.FromSeconds(.1));
+            CurrentPageHasLeftExtraContent = page.LeftExtraContent != null;
             CurrentPage = page;
             page.Content?.ViewControl.DataContext = page.Content.ViewModel;
             _LeftExtraControl_Scale = 1;
