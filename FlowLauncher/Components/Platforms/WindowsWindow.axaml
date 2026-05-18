@@ -54,7 +54,7 @@
                             </TranslateTransform>
                         </Grid.RenderTransform>
                         <!-- ReSharper disable once Xaml.PossibleNullReferenceException -->
-                        <c:FlowRadioButton Grid.Column="0" Classes="TopBar IconOnly"
+                        <c:FlowButton Grid.Column="0" Classes="TopBar IconOnly"
                                 Icon="{StaticResource IconArrowLeft}" Click="BackButton_OnClick"
                                 IsEnabled="{Binding RootLayout.HasLastPage}"
                                 ToolTip.Tip="{Binding RootLayout.LastPage.Title}"/>
@@ -72,15 +72,15 @@
                                 </Transitions></TranslateTransform.Transitions>
                             </TranslateTransform>
                         </Grid.RenderTransform>
-                        <c:FlowRadioButton Classes="TopBar" Text="Flow Launcher"
+                        <c:FlowButton Classes="TopBar" Text="Flow Launcher"
                                 IsChecked="True" IsEnabled="False"
                                 PressingForeground="Black" Background="#BFFF"
                                 FontSize="14" FontWeight="Medium"/>
                     </Grid>
                     <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="5">
-                        <c:FlowRadioButton Classes="TopBar IconOnly" Click="ButtonTestNativeWindow_OnClick" Icon="{StaticResource IconTools}"/>
-                        <c:FlowRadioButton Classes="TopBar IconOnly" Click="ButtonMinimize_OnClick" Icon="{StaticResource IconMinimize}"/>
-                        <c:FlowRadioButton Classes="TopBar IconOnly" Click="ButtonClose_OnClick" Icon="{StaticResource IconClose}"/>
+                        <c:FlowButton Classes="TopBar IconOnly" Click="ButtonTestNativeWindow_OnClick" Icon="{StaticResource IconTools}"/>
+                        <c:FlowButton Classes="TopBar IconOnly" Click="ButtonMinimize_OnClick" Icon="{StaticResource IconMinimize}"/>
+                        <c:FlowButton Classes="TopBar IconOnly" Click="ButtonClose_OnClick" Icon="{StaticResource IconClose}"/>
                     </StackPanel>
                 </Grid>
             </Grid>

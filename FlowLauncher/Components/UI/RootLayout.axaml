@@ -22,7 +22,7 @@
                         </Transitions>
                     </StackPanel.Transitions>
                     <StackPanel.Styles>
-                        <Style Selector="c|FlowRadioButton">
+                        <Style Selector="c|FlowButton">
                             <Setter Property="IsChecked">
                                 <MultiBinding Converter="{x:Static c:Converters.AllEqual}">
                                     <Binding Path="CurrentPagePreview.Id"/>
@@ -33,13 +33,13 @@
                             <Setter Property="CommandParameter" Value="{Binding Tag, RelativeSource={RelativeSource Self}}"/>
                         </Style>
                     </StackPanel.Styles>
-                    <c:FlowRadioButton Classes="TopBar" Icon="{StaticResource IconPlay}"
+                    <c:FlowButton Classes="TopBar" Icon="{StaticResource IconPlay}"
                             Text="{x:Static r:Strings.PageTitleMain}" Tag="main"/>
-                    <c:FlowRadioButton Classes="TopBar" Icon="{StaticResource IconDownload}"
+                    <c:FlowButton Classes="TopBar" Icon="{StaticResource IconDownload}"
                             Text="{x:Static r:Strings.PageTitleInstall}" Tag="install"/>
-                    <c:FlowRadioButton Classes="TopBar" Icon="{StaticResource IconTools}"
+                    <c:FlowButton Classes="TopBar" Icon="{StaticResource IconTools}"
                             Text="{x:Static r:Strings.PageTitleTools}" Tag="tools"/>
-                    <c:FlowRadioButton Classes="TopBar" Icon="{StaticResource IconSettings}"
+                    <c:FlowButton Classes="TopBar" Icon="{StaticResource IconSettings}"
                             Text="{x:Static r:Strings.PageTitleSettings}" Tag="settings"/>
                 </StackPanel>
                 <Border Background="Transparent" IsVisible="{Binding HasLastPage}"/>

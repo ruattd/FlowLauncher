@@ -36,7 +36,7 @@
                     </TranslateTransform>
                 </Grid.RenderTransform>
                 <!-- ReSharper disable Xaml.PossibleNullReferenceException -->
-                <c:FlowRadioButton Grid.Column="0" Classes="TopBar" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                <c:FlowButton Grid.Column="0" Classes="TopBar" VerticalAlignment="Bottom" HorizontalAlignment="Left"
                         Icon="{StaticResource IconArrowLeft}" Click="BackButton_OnClick"
                         IsEnabled="{Binding RootLayout.HasLastPage}"
                         Text="{Binding RootLayout.LastPage.Title}"

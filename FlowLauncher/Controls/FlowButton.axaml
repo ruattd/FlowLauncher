@@ -1,0 +1,72 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="using:FlowLauncher.Controls">
+
+    <Design.PreviewWith>
+        <c:FlowButton/>
+    </Design.PreviewWith>
+
+    <Style Selector=":is(c|FlowButton)">
+        <!-- Set Defaults -->
+        <Setter Property="ContentTemplate">
+            <ControlTemplate x:DataType="c:FlowButton">
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                    <Grid.Resources>
+                        <Transitions x:Key="Transitions">
+                            <BrushTransition Property="Foreground" Duration="0:0:.1"/>
+                        </Transitions>
+                    </Grid.Resources>
+                    <Grid.Tag>
+                        <MultiBinding Converter="{x:Static c:Converters.IfBranch}">
+                            <MultiBinding Converter="{x:Static BoolConverters.Or}">
+                                <Binding Path="IsPressing"/>
+                                <Binding Path="IsChecked"/>
+                            </MultiBinding>
+                            <Binding Path="PressingForeground"/>
+                            <Binding Path="Foreground"/>
+                        </MultiBinding>
+                    </Grid.Tag>
+                    <PathIcon Grid.Column="0" Data="{Binding Icon}"
+                            IsVisible="{Binding Icon, Converter={x:Static ObjectConverters.IsNotNull}}"
+                            Foreground="{Binding $parent.Tag}"
+                            Transitions="{StaticResource Transitions}"
+                            Width="{Binding IconWidth}"
+                            Height="{Binding IconWidth}"
+                            Margin="{Binding IconMargin}"></PathIcon>
+                    <TextBlock Grid.Column="1" Text="{Binding Text}"
+                            IsVisible="{Binding Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                            Foreground="{Binding $parent.Tag}"
+                            HorizontalAlignment="{Binding TextAlignment}"
+                            VerticalAlignment="Center"
+                            Transitions="{StaticResource Transitions}"
+                            FontSize="{Binding FontSize}"
+                            FontWeight="{Binding FontWeight}"
+                            FontFamily="{Binding FontFamily}"
+                            FontFeatures="{Binding FontFeatures}"
+                            FontStretch="{Binding FontStretch}"
+                            FontStyle="{Binding FontStyle}"/>
+                    <TemplatedControl Grid.Column="2" DataContext="{Binding .}" Template="{Binding RightAreaTemplate}"
+                            IsVisible="{Binding RightAreaTemplate, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource FlowTextPrimary}"/>
+        <Setter Property="PressingForeground" Value="{DynamicResource FlowBackground}"/>
+        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="IconMargin" Value="0,0,6,0"/>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="MinWidth" Value="20"/>
+        <Setter Property="IconWidth" Value="14"/>
+        <Setter Property="CornerRadius" Value="33550336"/>
+    </Style>
+
+    <Style Selector="c|FlowButton.IconOnly">
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="IconMargin" Value="0"/>
+    </Style>
+
+    <Style Selector="c|FlowButton.Tinted">
+        <Setter Property="BackgroundOpacity" Value=".1"/>
+    </Style>
+
+</Styles>

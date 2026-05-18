@@ -6,8 +6,14 @@
         <c:FlowMenuItem/>
     </Design.PreviewWith>
 
-    <Style Selector="c|FlowMenuItem">
+    <Style Selector=":is(c|FlowMenuItem)">
         <!-- Set Defaults -->
+        <Style Selector="^:pointerover, ^:focus">
+            <Setter Property="PriorityBackgroundOpacity" Value=".15"/>
+        </Style>
+        <Style Selector="^:pressing, ^:checked">
+            <Setter Property="PriorityBackgroundOpacity" Value=".3"/>
+        </Style>
         <Setter Property="RightAreaTemplate">
             <ControlTemplate x:DataType="c:FlowMenuItem">
                 <ItemsControl ItemsSource="{Binding ExtraControls}">
@@ -21,8 +27,6 @@
         </Setter>
         <Setter Property="CornerRadius" Value="0"/>
         <Setter Property="BackgroundOpacity" Value="0"/>
-        <Setter Property="PointerOverBackgroundOpacity" Value=".15"/>
-        <Setter Property="PressingBackgroundOpacity" Value=".3"/>
         <Setter Property="PressingForeground" Value="{DynamicResource FlowAccent}"/>
         <Setter Property="MinHeight" Value="30"/>
         <Setter Property="MinWidth" Value="100"/>

@@ -3,7 +3,7 @@ using Avalonia.Metadata;
 
 namespace FlowLauncher.Controls;
 
-public class FlowMenuItem : FlowRadioButton
+public class FlowMenuItem : FlowButton
 {
     public static readonly DirectProperty<FlowMenuItem, Avalonia.Controls.Controls> ExtraControlsProperty =
         AvaloniaProperty.RegisterDirect<FlowMenuItem, Avalonia.Controls.Controls>(
